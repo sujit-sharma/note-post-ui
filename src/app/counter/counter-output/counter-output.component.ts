@@ -11,15 +11,11 @@ import {getCounter} from '../state/counter.selectors';
 })
 export class CounterOutputComponent implements OnInit {
   counter: number;
+  counter$: Observable<number>;
 
   constructor(private store: Store<{ counter: CounterState }>) { }
 
   ngOnInit(): void {
-    this.store.select(getCounter).subscribe((data => {
-      console.log('Counter Observable called');
-      this.counter = data;
-    })
-    );
+    this.counter$ = this.store.select(getCounter);
   }
-
 }

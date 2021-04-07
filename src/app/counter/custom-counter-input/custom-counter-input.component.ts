@@ -3,6 +3,7 @@ import {Store} from '@ngrx/store';
 import {CounterState} from '../state/counter.state';
 import {changeWebName, customIncrement} from '../state/counter.action';
 import {getWebName} from '../state/counter.selectors';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-custom-counter-input',
@@ -13,14 +14,11 @@ export class CustomCounterInputComponent implements OnInit {
 
   count: number;
   webName: string;
+  webName$: Observable<string>;
   constructor(private store: Store<{counter: CounterState}>) { }
 
   ngOnInit(): void {
-    this.store.select(getWebName).subscribe((data => {
-      console.log('Web Name Observer Called');
-      this.webName = data;
-    })
-    );
+    this.webName$ = this.store.select(getWebName);
   }
 
   onAdd(): void{

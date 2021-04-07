@@ -1,6 +1,6 @@
 
 <div>
-  <div class="my-3"> {{webName}}</div>
+  <div class="my-3"> {{webName$ | async}}</div>
 
   <input type="text" placeholder="Enter Integer value"[(ngModel)]="count"/>&nbsp;
   <button class="btn btn-primary" (click)="onAdd()">Add to counter</button>
