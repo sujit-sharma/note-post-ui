@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import {AppRoutingModule} from './app-routing.module';
 import { HeaderComponent } from './shared/component/header/header.component';
+import { PostsListComponent } from './posts/posts-list/posts-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HeaderComponent } from './shared/component/header/header.component';
     CounterButtonsComponent,
     CustomCounterInputComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    PostsListComponent
   ],
   imports: [
     BrowserModule, StoreModule.forRoot({counter: counterReducer}), FormsModule, AppRoutingModule
