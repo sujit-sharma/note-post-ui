@@ -8,7 +8,7 @@ import { CounterButtonsComponent } from './counter/counter-buttons/counter-butto
 import {StoreModule} from '@ngrx/store';
 import {counterReducer} from './counter/state/counter.reducer';
 import { CustomCounterInputComponent } from './counter/custom-counter-input/custom-counter-input.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import {AppRoutingModule} from './app-routing.module';
 import { HeaderComponent } from './shared/component/header/header.component';
@@ -28,13 +28,15 @@ import { AddPostComponent } from './posts/add-post/add-post.component';
     HomeComponent,
     HeaderComponent,
     PostsListComponent,
-    AddPostComponent
+    AddPostComponent,
   ],
   imports: [
     BrowserModule, StoreModule.forRoot(appReducer), FormsModule, AppRoutingModule,
     StoreDevtoolsModule.instrument({
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
+    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
