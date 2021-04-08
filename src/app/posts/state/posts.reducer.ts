@@ -13,7 +13,14 @@ const _postsReducer = createReducer(
       posts: [...state.posts, post]
     };
 
-  })
+  }),
+  // on(updatePosts, (state, action) => {
+  //   const post = {...action.post};
+  //   return {
+  //     ...state,
+  //     posts: [...state.posts, post]
+  //   }
+  // })
   );
 
 
