@@ -13,6 +13,9 @@ import { HomeComponent } from './home/home.component';
 import {AppRoutingModule} from './app-routing.module';
 import { HeaderComponent } from './shared/component/header/header.component';
 import { PostsListComponent } from './posts/posts-list/posts-list.component';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
+import {appReducer} from './store/app.state';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { PostsListComponent } from './posts/posts-list/posts-list.component';
     PostsListComponent
   ],
   imports: [
-    BrowserModule, StoreModule.forRoot({counter: counterReducer}), FormsModule, AppRoutingModule
+    BrowserModule, StoreModule.forRoot(appReducer), FormsModule, AppRoutingModule,
+    StoreDevtoolsModule.instrument({
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
