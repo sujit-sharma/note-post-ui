@@ -19,9 +19,6 @@ import { EditPostComponent } from './posts/edit-post/edit-post.component';
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    PostsListComponent,
-    AddPostComponent,
-    EditPostComponent,
   ],
   imports: [
     BrowserModule, StoreModule.forRoot(appReducer), FormsModule, AppRoutingModule,
