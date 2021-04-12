@@ -16,8 +16,8 @@ export class AuthEffects {
      return this.authService.login(acts.email, acts.password)
        .pipe(
          map((data) => {
-           console.log('login success' + JSON.stringify(data));
-           return loginSuccess();
+           const user = this.authService.formatUser(data);
+           return loginSuccess({user});
          })
        );
    })

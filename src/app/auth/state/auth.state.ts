@@ -1,6 +1,12 @@
 
 
 // tslint:disable-next-line:no-empty-interface
-export interface AuthState {}
+import {User} from '../../models/user.models';
 
-export const initialState: AuthState = {};
+export interface AuthState {
+  user: User | null;
+}
+
+export const initialState: AuthState = {
+  user: null,
+};
