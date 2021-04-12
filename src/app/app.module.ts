@@ -12,6 +12,7 @@ import {environment} from '../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
 import {LoadingSpinnerComponent} from './shared/component/loading-spinner/loading-spinner.component';
+import {appReducer} from './store/app.state';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import {LoadingSpinnerComponent} from './shared/component/loading-spinner/loadin
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(appReducer),
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
