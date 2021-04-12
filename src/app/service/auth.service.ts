@@ -19,10 +19,20 @@ export class AuthService {
       { email, password, returnSecureToken: true }
     );
   }
-  formatUser(data: AuthResponseData ):any {
+  formatUser(data: AuthResponseData ): User {
     const expirationDate = new Date(new Date().getTime() + +data.expiresIn * 1000 );
     const user = new User(data.email, data.idToken, data.localId, expirationDate);
     return user;
+  }
+  getErrorMessage(message: string): any {
+    switch (message) {
+      case 'EMAIL_NOT_FOUND':
+        return 'Email does not exist';
+      case 'INVALID_PASSWORD':
+        return ' Invalid Password';
+      default:
+        return 'An error Occurred. Please try again';
+    }
   }
 }
 
