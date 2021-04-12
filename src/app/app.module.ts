@@ -9,6 +9,8 @@ import {AppRoutingModule} from './app-routing.module';
 import { HeaderComponent } from './shared/component/header/header.component';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
+import {EffectsModule} from '@ngrx/effects';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,10 +23,12 @@ import {environment} from '../environments/environment';
     StoreModule.forRoot({}),
     FormsModule,
     AppRoutingModule,
+    HttpClientModule,
     StoreDevtoolsModule.instrument({
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
-    ReactiveFormsModule
+    EffectsModule.forRoot([]),
+    ReactiveFormsModule,
 
   ],
   providers: [],
