@@ -9,7 +9,6 @@ import {AppRoutingModule} from './app-routing.module';
 import { HeaderComponent } from './shared/component/header/header.component';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
-import {appReducer} from './store/app.state';
 
 @NgModule({
   declarations: [
