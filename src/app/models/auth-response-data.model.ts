@@ -3,5 +3,5 @@ export interface AuthResponseData {
   email: string;
   expiresIn: string;
   localId: string;
-  register: boolean;
+  register?: boolean;
 }

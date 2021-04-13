@@ -1,6 +1,6 @@
 import {createReducer, on} from '@ngrx/store';
 import {initialState} from './auth.state';
-import {loginSuccess} from './auth.action';
+import {loginSuccess, signupSuccess} from './auth.action';
 
 
 // tslint:disable-next-line:variable-name
@@ -13,8 +13,13 @@ const _authReducer = createReducer(
       user: action.user,
 
     };
-  })
-
+  }),
+  on(signupSuccess, (state, action) => {
+    return {
+      ...state,
+      user: action.user,
+    };
+  }),
   );
 
 export function AuthReducer(state, action): any {
