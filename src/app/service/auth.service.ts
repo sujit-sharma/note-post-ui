@@ -80,6 +80,8 @@ export class AuthService {
   }
 
   logout(): void {
+    // tslint:disable-next-line:no-debugger
+    debugger;
     localStorage.removeItem('userData');
     if (this.timeoutInterval) {
       clearTimeout(this.timeoutInterval);

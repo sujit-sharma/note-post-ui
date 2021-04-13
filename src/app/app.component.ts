@@ -1,10 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {AppState} from './store/app.state';
 import {Store} from '@ngrx/store';
 import {getErrorMessage, getLoading} from './store/shared/shared.selector';
-import {ErrorMessage} from '@angular/compiler-cli/ngcc/src/execution/cluster/api';
-import {autoLogin} from './auth/state/auth.action';
+import {autoLogin, autoLogout} from './auth/state/auth.action';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +15,26 @@ export class AppComponent implements OnInit {
   showLoading: Observable<boolean>;
   errorMessage: Observable<string>;
 
+  time: number;
+
+
   constructor(private store: Store<AppState>) {  }
   ngOnInit(): void {
     this.showLoading = this.store.select(getLoading);
     this.errorMessage = this.store.select(getErrorMessage);
     this.store.dispatch(autoLogin());
 
+    this.resetTimer();
+  }
+  @HostListener('document:mousemove')
+  @HostListener('document:keypress')
+  @HostListener('document:click')
+  @HostListener('document:wheel')
+  resetTimer(): void {
+    clearTimeout(this.time);
+    this.time = setTimeout(() => {
+      this.store.dispatch(autoLogout());
+      alert('Idle for a while. You are logout auto ');
+    }, 300000);
   }
 }
