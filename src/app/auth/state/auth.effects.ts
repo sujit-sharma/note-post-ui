@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {act, Actions, createEffect, ofType} from '@ngrx/effects';
 import {AuthService} from '../../service/auth.service';
-import {loginStart, loginSuccess, signupStart, signupSuccess} from './auth.action';
+import {autoLogin, loginStart, loginSuccess, signupStart, signupSuccess} from './auth.action';
 import {catchError, exhaustMap, map, mergeMap, tap} from 'rxjs/operators';
 import {AppState} from '../../store/app.state';
 import {Store} from '@ngrx/store';
@@ -27,6 +27,7 @@ export class AuthEffects {
            this.store.dispatch(setLoadingSpinner({ status: false}));
            this.store.dispatch(setErrorMessage({ message: ''}));
            const user = this.authService.formatUser(data);
+           this.authService.persistUser(user);
            return loginSuccess({user});
          }),
          catchError((err => {
@@ -59,6 +60,7 @@ export class AuthEffects {
           map((data) => {
             this.store.dispatch(setLoadingSpinner({status: false}));
             const user = this.authService.formatUser(data);
+            this.authService.persistUser(user);
             return signupSuccess({user});
           }),
           catchError((err => {
@@ -71,4 +73,16 @@ export class AuthEffects {
       })
       );
   });
+  autoLogin$ = createEffect(() => {
+    return this.action$.pipe(
+      ofType(autoLogin),
+      map((action) => {
+        const user = this.authService.getPersistUser();
+        console.log(user);
+      })
+    );
+
+  },
+    {dispatch: false}
+    );
 }

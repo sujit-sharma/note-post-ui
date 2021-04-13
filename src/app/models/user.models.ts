@@ -2,6 +2,9 @@ export class User {
   constructor(private email: string,
               private token: string,
               private localId: string,
-              private expirationdate: Date
+              private expirationDate: Date
   ) {}
+  get expireDate(): Date{
+    return this.expirationDate;
+  }
 }

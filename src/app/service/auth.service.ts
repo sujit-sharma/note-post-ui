@@ -11,6 +11,7 @@ import {User} from '../models/user.models';
 })
 
 export class AuthService {
+  timeoutInterval: any;
   constructor(private http: HttpClient) { }
   // tslint:disable-next-line:typedef
   login(email: string, password: string): Observable<AuthResponseData> {
@@ -41,6 +42,35 @@ export class AuthService {
       default:
         return 'An error Occurred. Please try again';
     }
+  }
+
+  persistUser(user: User): void {
+    localStorage.setItem('userData', JSON.stringify(user));
+
+    this.runTimeoutInterval(user);
+
+  }
+
+  getPersistUser(): any {
+    const userString  = localStorage.getItem('userData');
+    if (userString) {
+      const userData = JSON.parse(userString);
+      const expirationDate = new Date(userData.expirationTime);
+      const user = new User(userData.email, userData.token, userData.localId, expirationDate);
+      this.runTimeoutInterval(user);
+      return user;
+    }
+    return null;
+  }
+
+  private runTimeoutInterval(user: User): void {
+    const todayDate = new Date().getTime();
+    const expiresDate = user.expireDate.getTime();
+    const timeInterval = expiresDate - todayDate;
+    setTimeout(() => {
+
+    },  this.timeoutInterval =  timeInterval);
+
   }
 }
 

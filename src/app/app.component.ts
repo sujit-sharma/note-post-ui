@@ -4,6 +4,7 @@ import {AppState} from './store/app.state';
 import {Store} from '@ngrx/store';
 import {getErrorMessage, getLoading} from './store/shared/shared.selector';
 import {ErrorMessage} from '@angular/compiler-cli/ngcc/src/execution/cluster/api';
+import {autoLogin} from './auth/state/auth.action';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.showLoading = this.store.select(getLoading);
     this.errorMessage = this.store.select(getErrorMessage);
+    this.store.dispatch(autoLogin());
 
   }
 }
