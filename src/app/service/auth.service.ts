@@ -4,6 +4,9 @@ import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {AuthResponseData} from '../models/auth-response-data.model';
 import {User} from '../models/user.models';
+import {AppState} from '../store/app.state';
+import {Store} from '@ngrx/store';
+import {autoLogout} from '../auth/state/auth.action';
 
 
 @Injectable({
@@ -12,7 +15,9 @@ import {User} from '../models/user.models';
 
 export class AuthService {
   timeoutInterval: any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private store: Store<AppState>
+  ) { }
   // tslint:disable-next-line:typedef
   login(email: string, password: string): Observable<AuthResponseData> {
     return this.http.post<AuthResponseData>(
@@ -68,9 +73,18 @@ export class AuthService {
     const expiresDate = user.expireDate.getTime();
     const timeInterval = expiresDate - todayDate;
     setTimeout(() => {
+       this.store.dispatch(autoLogout());
 
     },  this.timeoutInterval =  timeInterval);
 
+  }
+
+  logout(): void {
+    localStorage.removeItem('userData');
+    if (this.timeoutInterval) {
+      clearTimeout(this.timeoutInterval);
+      this.timeoutInterval = null;
+    }
   }
 }
 
