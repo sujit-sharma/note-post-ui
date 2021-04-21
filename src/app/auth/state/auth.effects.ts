@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {act, Actions, createEffect, ofType} from '@ngrx/effects';
+import { Actions, createEffect, ofType} from '@ngrx/effects';
 import {AuthService} from '../../service/auth.service';
 import {autoLogin, autoLogout, loginStart, loginSuccess, signupStart, signupSuccess} from './auth.action';
 import {catchError, exhaustMap, map, mergeMap, tap} from 'rxjs/operators';
@@ -8,7 +8,6 @@ import {Store} from '@ngrx/store';
 import {of} from 'rxjs';
 import {setErrorMessage, setLoadingSpinner} from '../../store/shared/shared.actions';
 import {Router} from '@angular/router';
-import {log} from 'util';
 
 
 @Injectable()

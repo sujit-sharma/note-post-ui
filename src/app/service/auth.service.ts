@@ -53,7 +53,6 @@ export class AuthService {
     localStorage.setItem('userData', JSON.stringify(user));
 
     this.runTimeoutInterval(user);
-
   }
 
   getPersistUser(): any {
@@ -73,15 +72,11 @@ export class AuthService {
     const expiresDate = user.expireDate.getTime();
     const timeInterval = expiresDate - todayDate;
     setTimeout(() => {
-       this.store.dispatch(autoLogout());
+      this.store.dispatch(autoLogout());
 
     },  this.timeoutInterval =  timeInterval);
-
   }
-
   logout(): void {
-    // tslint:disable-next-line:no-debugger
-    debugger;
     localStorage.removeItem('userData');
     if (this.timeoutInterval) {
       clearTimeout(this.timeoutInterval);

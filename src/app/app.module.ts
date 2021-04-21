@@ -21,7 +21,6 @@ import {AuthEffects} from './auth/state/auth.effects';
     HomeComponent,
     HeaderComponent,
     LoadingSpinnerComponent,
-    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
